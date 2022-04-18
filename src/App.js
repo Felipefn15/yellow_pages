@@ -41,7 +41,7 @@ function App() {
   }, []);
 
   const getBackEndData = () => {
-    fetch("http://localhost:8000/")
+    fetch("https://yellow-page-server.herokuapp.com/")
       .then((res) => res.json())
       .then((data) => {
         data.map((s, i) => (s.id = i + 1));
