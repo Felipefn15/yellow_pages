@@ -47,6 +47,7 @@ function App() {
         data.map((s, i) => (s.id = i + 1));
         console.log(data);
         setData(data);
+        setSearchReulst(data);
       });
   };
 
@@ -75,17 +76,19 @@ function App() {
 
   const search = (searchText) => {
     const splitText = splitSearchText(searchText);
-    const searchResult = data.filter((element) => {
-      if (splitText.phone_number) {
-        return element.phone_number.includes(splitText.phone_number);
-      } else if (splitText.age) {
-        let years = calculateAge(element.birthday.substr(0, 19));
-        return years === parseInt(splitText.age);
-      } else if (splitText.name) {
-        return element.name.includes(splitText.name);
-      }
-      return [];
-    });
+    const searchResult = !splitText
+      ? data
+      : data.filter((element) => {
+          if (splitText.phone_number) {
+            return element.phone_number.includes(splitText.phone_number);
+          } else if (splitText.age) {
+            let years = calculateAge(element.birthday.substr(0, 19));
+            return years === parseInt(splitText.age);
+          } else if (splitText.name) {
+            return element.name.includes(splitText.name);
+          }
+          return [];
+        });
     setSearchReulst(searchResult);
   };
 
